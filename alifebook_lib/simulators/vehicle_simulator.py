@@ -110,7 +110,7 @@ class VehicleSimulator(object):
         self.__vehicle_body.position = self.ARENA_SIZE/2+self.DISPLAY_MARGIN, self.ARENA_SIZE/2+self.DISPLAY_MARGIN
         self.__vehicle_body.angle = 0
         for b in self.__feed_bodies:
-            b.position = self.DISPLAY_MARGIN + self.__feed_radius + np.random.rand(2) * (self.ARENA_SIZE - self.__feed_radius*2)
+            b.position = list(self.DISPLAY_MARGIN + self.__feed_radius + np.random.rand(2) * (self.ARENA_SIZE - self.__feed_radius*2))
 
     def update(self, action):
         self.__vehicle_body.velocity = (0, 0)
@@ -149,7 +149,7 @@ class VehicleSimulator(object):
         self.__feed_touch_counter[feed] += 1
         self.__feed_sensor_val = True
         if (self.__feed_touch_counter[feed] > self.FEED_EATING_TIME):
-            feed.body.position = self.DISPLAY_MARGIN + feed.radius/2 + np.random.rand(2) * (self.ARENA_SIZE - feed.radius)
+            feed.body.position = list(self.DISPLAY_MARGIN + feed.radius/2 + np.random.rand(2) * (self.ARENA_SIZE - feed.radius))
         return True
 
     def __feed_separate_handler(self, arbiter, space, data):
