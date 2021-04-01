@@ -53,7 +53,7 @@ class VehicleSimulator(object):
         for w in walls:
             w.collision_type = self.COLLISION_TYPE.OBJECT
             w.friction = 0.2
-        self.__simulation_space.add(walls)
+        self.__simulation_space.add(*walls)
 
         # vehicle
         mass = 1
@@ -88,7 +88,7 @@ class VehicleSimulator(object):
             shape = Circle(body, obstacle_radius)
             shape.friction = 0.2
             shape.collision_type = self.COLLISION_TYPE.OBJECT
-            self.__simulation_space.add(shape)
+            self.__simulation_space.add(body, shape)
 
         for i in range(feed_num):
             body = Body(1, 1)
@@ -161,7 +161,7 @@ class VehicleSimulator(object):
 
     def __left_sensr_handler(self, arbiter, space, data):
         p = arbiter.contact_point_set.points[0]
-        distance = self.__vehicle_body.world_to_local(p.point_b).get_length()
+        distance = self.__vehicle_body.world_to_local(p.point_b).length
         self.__left_sensor_val = 1 - distance / self.SENSOR_RANGE
         self.__left_sensor_val += self.SENSOR_NOISE * np.random.randn()
         return True
@@ -172,7 +172,7 @@ class VehicleSimulator(object):
 
     def __right_sensr_handler(self, arbiter, space, data):
         p = arbiter.contact_point_set.points[0]
-        distance = self.__vehicle_body.world_to_local(p.point_b).get_length()
+        distance = self.__vehicle_body.world_to_local(p.point_b).length
         self.__right_sensor_val = 1 - distance / self.SENSOR_RANGE
         self.__right_sensor_val += self.SENSOR_NOISE * np.random.randn()
         return True
