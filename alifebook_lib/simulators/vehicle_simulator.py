@@ -13,8 +13,8 @@ class VehicleSimulator(object):
     SENSOR_RANGE = 80
     SENSOR_NOISE = 0
     MOTOR_NOISE = 1.0
-    FEED_COLOR = (0, 0, 0)
-    FEED_ACTIVE_COLOR = (255, 0, 0)
+    FEED_COLOR = (0, 0, 0, 255)
+    FEED_ACTIVE_COLOR = (255, 0, 0, 255)
     FEED_EATING_TIME = 200
 
     def __init__(self, width=600, height=600, obstacle_num=5, obstacle_radius=30, feed_num=0, feed_radius=5):
@@ -140,7 +140,7 @@ class VehicleSimulator(object):
         return sensor_data
 
     def set_bodycolor(self, color):
-        assert len(color) == 3
+        assert len(color) == 4
         self.__vehicle_shape.color = color
 
     def __feed_touch_handler(self, arbiter, space, data):

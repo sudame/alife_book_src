@@ -163,12 +163,12 @@ while simulator:
     left_wheel_speed  = controller.get_output('left_wheel_speed')
     right_wheel_speed = controller.get_output('right_wheel_speed')
     action = [left_wheel_speed, right_wheel_speed]
-    color = (0, 0, 255)
+    color = (0, 0, 255, 255)
     active_module = controller.get_active_module_name()
     if active_module is "AvoidModule":
-        simulator.set_bodycolor((255, 0, 0))
+        simulator.set_bodycolor((255, 0, 0, 255))
     elif active_module in ("WanderModule", "ChaosWanderModule"):
-        simulator.set_bodycolor((0, 255, 0))
+        simulator.set_bodycolor((0, 255, 0, 255))
     elif active_module in ("ExploreModule", "ChaosExploreModule"):
-        simulator.set_bodycolor((0, 0, 255))
+        simulator.set_bodycolor((0, 0, 255, 255))
     simulator.update(action)
